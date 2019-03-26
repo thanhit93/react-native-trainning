@@ -1,4 +1,4 @@
-#  BeeSightSoftRCT
+#  React native trainning
 
 Version: 0.0.2
 
