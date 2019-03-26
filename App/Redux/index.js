@@ -8,9 +8,9 @@ import ReduxPersist from '../Config/ReduxPersist'
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   search: require('./SearchRedux').reducer,
+  detail: require('../Containers/Details/Detail.Reducer').reducer
   /* Reducer here */
   //@nhancv 2019-03-11
-  //TODO: Add Reducer here
 })
 
 export default () => {
