@@ -1,4 +1,4 @@
-package com.beesightsoft.rct;
+package com.app.test;
 
 import android.app.Application;
 import android.content.Context;

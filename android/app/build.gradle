@@ -116,7 +116,7 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "com.beesightsoft.rct"
+        applicationId "com.app.test"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode _VERSION_CODE
