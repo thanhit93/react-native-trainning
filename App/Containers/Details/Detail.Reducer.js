@@ -87,7 +87,6 @@ export const reducer = createReducer(INITIAL_STATE, {
       ? action.data.data : [...previousChangePassword.data, ...action.data.data]
     previousChangePassword.isFetching = false
     previousChangePassword.error = false
-    console.log('dta', previousChangePassword)
     return {
       ...state,
       changePassword: previousChangePassword
@@ -95,13 +94,13 @@ export const reducer = createReducer(INITIAL_STATE, {
   },
   [DetailType.POST_CHANGE_PASSWORD_FAILURE]: (state, action) => {
     console.log('POST_CHANGE_PASSWORD_FAILURE', action.error)
+    let previousChangePassword = {...state.changePassword}
+    previousChangePassword.data = null
+    previousChangePassword.isFetching = false
+    previousChangePassword.error = action.error
     return {
       ...state,
-      changePassword: {
-        data: null,
-        isFetching: false,
-        error: action.error
-      }
+      changePassword: previousChangePassword
     }
   },
   [DetailType.POST_CHANGE_PASSWORD_CLEAN]: (state, action) => {
@@ -109,6 +108,8 @@ export const reducer = createReducer(INITIAL_STATE, {
       ...state,
       changePassword: {
         page: 1,
+        pageSize: 10,
+        canLoadMore: false,
         data: null,
         isFetching: false,
         error: false
