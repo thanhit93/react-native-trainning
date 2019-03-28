@@ -15,8 +15,14 @@ const create = (baseURL = Config.API_URL) => {
   const onFetchUserApi = (body) => {
     return api.get('search/users', {q: body.username})
   }
+  const  onChangePasswordApi =(body)=> {
+    return api.get('/district/districts', {page: body.page, pageSize: body.pageSize,
+      data: encodeURIComponent(JSON.stringify(body.data))
+      })
+  }
   return {
-    onFetchUserApi
+    onFetchUserApi,
+    onChangePasswordApi
   }
 }
 export default {create}

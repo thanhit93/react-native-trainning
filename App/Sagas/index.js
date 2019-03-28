@@ -15,7 +15,8 @@ export default function * root () {
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
 
-    takeLatest(DetailType.REQUEST_FETCH_USER, DetailFunction.onFetchUser, DetailApi.create())
+    takeLatest(DetailType.REQUEST_FETCH_USER, DetailFunction.onFetchUser, DetailApi.create()),
+    takeLatest(DetailType.REQUEST_CHANGE_PASSWORD, DetailFunction.onChangePassword, DetailApi.create())
 
     //@nhancv 2019-03-11
     //TODO: redux flow configuration

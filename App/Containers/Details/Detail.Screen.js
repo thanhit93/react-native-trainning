@@ -15,8 +15,10 @@ class DetailScreen extends Component {
   }
 
   render () {
-    const { data, isFetching } = this.props.detail
-    const {isRefreshing} = this.state
+    const { changePassword: { data, isFetching } = {} } = this.props.detail
+    /*const data = this.props.detail.user ? this.props.detail.user.data : []
+    const isFetching = this.props.detail.user ? this.props.detail.user.isFetching : false*/
+    const { isRefreshing } = this.state
     return (
       <View style={styles.mainContainer}>
 
@@ -39,7 +41,8 @@ class DetailScreen extends Component {
   renderItem = ({ item, index }) => {
     return (
       <View style={{ height: 30, backgroundColor: 'pink', justifyContent: 'center' }}>
-        <Text style={{marginHorizontal: 10}}>{item.login}</Text>
+        {/*<Text style={{ marginHorizontal: 10 }}>{`${item.id}-${item.name}`}</Text>*/}
+        <Text style={{ marginHorizontal: 10 }}>{item.id + "-" + item.name}</Text>
       </View>
     )
   }
@@ -49,10 +52,19 @@ class DetailScreen extends Component {
   }
 
   componentDidMount () {
-    let body = {
+    /*let body = {
       username: 'thanh'
     }
-    this.props.onGetUser(DetailAction.requestFetchUser(body))
+    this.props.onGetUser(DetailAction.requestFetchUser(body))*/
+    this.callApiChangePassword()
+  }
+
+  callApiChangePassword = () => {
+    this.props.onChangePasswordRequest(DetailAction.requestChangePassword({
+      page: 1,
+      pageSize: 10,
+      data: { filterProvince: 12 }
+    }))
   }
 
 }
@@ -65,7 +77,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    onGetUser: (request) => dispatch(request)
+    onGetUser: (request) => dispatch(request),
+    onChangePasswordRequest: (request) => dispatch(request)
   }
 }
 
