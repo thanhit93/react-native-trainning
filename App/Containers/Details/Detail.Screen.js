@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, View, FlatList, Text } from 'react-native'
+import { ActivityIndicator, View, FlatList, Image, Text } from 'react-native'
 import connect from 'react-redux/es/connect/connect'
 // Styles
 import styles from './Detail.Styles'
 import { DetailAction } from './Detail.Action'
+import ListItem from '../../Components/ListItem'
+import images from '../../Themes/Images'
 
 class DetailScreen extends Component {
 
@@ -15,7 +17,10 @@ class DetailScreen extends Component {
   }
 
   render () {
-    const { changePassword: { data, isFetching } = {} } = this.props.detail
+    const {
+      changePassword: { data: passData, isFetching } = {},
+      user: { data: userData } = {}
+    } = this.props.detail
     /*const data = this.props.detail.user ? this.props.detail.user.data : []
     const isFetching = this.props.detail.user ? this.props.detail.user.isFetching : false*/
     const { isRefreshing } = this.state
@@ -27,24 +32,27 @@ class DetailScreen extends Component {
         }
 
         <FlatList
-          data={data}
+          data={userData}
           keyExtractor={(item, index) => index.toString()}
           automaticallyAdjustContentInsets={false}
           renderItem={this.renderItem}
           refreshing={isRefreshing}
           onEndReachedThreshold={0.5}
           ItemSeparatorComponent={this.spaceLine}/>
+
+          {/*test view absolute*/}
+          <View style={{width: 50, height: 50, backgroundColor: 'gray', borderRadius: 25}}>
+            <Image style={{flex: 1}} source={images.buttonBackground}/>
+            <View style={{position: 'absolute', right: 10, bottom: 10, flexDirection: 'row-reverse'}}>
+
+            </View>
+          </View>
       </View>
     )
   }
 
   renderItem = ({ item, index }) => {
-    return (
-      <View style={{ height: 30, backgroundColor: 'pink', justifyContent: 'center' }}>
-        {/*<Text style={{ marginHorizontal: 10 }}>{`${item.id}-${item.name}`}</Text>*/}
-        <Text style={{ marginHorizontal: 10 }}>{item.id + "-" + item.name}</Text>
-      </View>
-    )
+    return <ListItem item={item}/>
   }
 
   spaceLine = () => {
@@ -52,11 +60,11 @@ class DetailScreen extends Component {
   }
 
   componentDidMount () {
-    /*let body = {
+    let body = {
       username: 'thanh'
     }
-    this.props.onGetUser(DetailAction.requestFetchUser(body))*/
-    this.callApiChangePassword()
+    this.props.onGetUser(DetailAction.requestFetchUser(body))
+    //this.callApiChangePassword()
   }
 
   callApiChangePassword = () => {

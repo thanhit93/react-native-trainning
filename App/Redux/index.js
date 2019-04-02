@@ -8,7 +8,8 @@ import ReduxPersist from '../Config/ReduxPersist'
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   search: require('./SearchRedux').reducer,
-  detail: require('../Containers/Details/Detail.Reducer').reducer
+  detail: require('../Containers/Details/Detail.Reducer').reducer,
+  testUI: require('../Containers/TestUI/TestUI.Reducer').reducer
   /* Reducer here */
   //@nhancv 2019-03-11
 })
